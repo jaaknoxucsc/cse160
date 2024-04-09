@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Draw a blue rectangle (canvas version)</title>
+</head>
+
+<body onload="main()">
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+    <script src="asg0.js"></script>
+    <div>
+        <canvas id="example" width="400" height="400">
+            Please use a browser that supports "canvas"
+        </canvas>
+    <div>
+        <input type="text" id="xCoord_v1" placeholder="X coordinate 1" />
+        <input type="text" id="yCoord_v1" placeholder="Y coordinate 1" />
+        <br/> 
+        <input type="text" id="xCoord_v2" placeholder="X coordinate 2" />
+        <input type="text" id="yCoord_v2" placeholder="Y coordinate 2" />
+        <br/> 
+        <input type="button" value="Draw" onclick="handleDrawEvent()" />
+    </div>
+        <div>
+            <select id="operation">
+                <option value="add">Add</option>
+                <option value="sub">Subtract</option>
+                <option value="mul">Multiply</option>
+                <option value="div">Divide</option>
+                <option value="mag">Magnitude</option>
+                <option value="norm">Normalize</option>
+                <option value="angle">Angle between</option>
+                <option value="area">Area of Triangle</option>
+            </select>
+            <input type="text" id="scalar" />
+            <br/>
+            <input type="button" value="Perform & Draw" onclick="handleDrawOperationEvent()" />
+        </div>
+    </div>
+</body>
+</html>

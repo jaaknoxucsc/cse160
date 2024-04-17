@@ -1,5 +1,5 @@
-import * as THREE from '../lib/three.module.js';
-import { OBJLoader } from '../lib/OBJLoader.js';
+import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import { OBJLoader } from 'https://unpkg.com/three/examples/jsm/loaders/OBJLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -13,11 +13,11 @@ const objLoader = new OBJLoader();
 objLoader.load('12140_Skull_v3_L2.obj', function(object) {
     object.traverse(function(child) {
         if (child instanceof THREE.Mesh) {
-            child.material.map = loader.load('Skull.jpg');  // Apply the texture
+            child.material.map = loader.load('Skull.jpg');
         }
     });
     scene.add(object);
-    object.position.set(0, -5, 0);  // Adjust position to make it a background element
+    object.position.set(0, -5, 0);
 });
 
 function makeInstance(geometry, texturePath, x) {

@@ -1,6 +1,3 @@
-import * as THREE from 'https://unpkg.com/three@0.128.0/build/three.module.js';
-import { OBJLoader } from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js';
-
 // Scene setup
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -10,7 +7,7 @@ document.body.appendChild(renderer.domElement);
 
 // Texture and OBJ Loaders
 const loader = new THREE.TextureLoader();
-const objLoader = new OBJLoader();
+const objLoader = new THREE.OBJLoader();
 
 // Load and display a static .obj model with texture
 objLoader.load('12140_Skull_v3_L2.obj', function(object) {

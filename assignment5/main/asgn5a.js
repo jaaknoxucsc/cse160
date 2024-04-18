@@ -33,7 +33,7 @@ objLoader.load('12140_Skull_v3_L2.obj', function(object) {
     });
 
     scene.add(object);
-    object.position.set(0, -5, 0); // Adjust position to be more centered
+    object.position.set(0, 0, 0); // Adjust position to be more centered
     console.log("Skull object added to the scene at position", object.position); // Log position details
 });
 

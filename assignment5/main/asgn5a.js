@@ -1,6 +1,6 @@
 import * as THREE from '../lib/three.module.js';
 import { OBJLoader } from '../lib/OBJLoader.js';
-import { MTLLoader } from 'https://threejs.org/examples/jsm/loaders/MTLLoader.js';
+import { MTLLoader } from '../lib/MTLLoader.js';
 
 
 const scene = new THREE.Scene();

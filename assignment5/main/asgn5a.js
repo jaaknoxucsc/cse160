@@ -7,17 +7,34 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+// Add ambient light to illuminate the entire scene
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
 const loader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
 
+// Load the OBJ file
 objLoader.load('12140_Skull_v3_L2.obj', function(object) {
+    console.log("Skull OBJ loaded:", object); // Log the loaded object
+
     object.traverse(function(child) {
         if (child instanceof THREE.Mesh) {
-            child.material.map = loader.load('Skull.jpg');  // Apply the texture
+            console.log("Skull Mesh found:", child); // Log mesh details
+
+            // Load and apply the texture
+            child.material.map = loader.load('Skull.jpg', function(texture) {
+                console.log("Skull texture loaded successfully", texture); // Log successful texture load
+            }, undefined, function(error) {
+                console.log("Error loading skull texture:", error); // Log texture loading error
+            });
+            child.material.needsUpdate = true; // Ensure the material is updated
         }
     });
+
     scene.add(object);
-    object.position.set(0, 0, 0);  // Adjust position to make it a background element
+    object.position.set(0, -5, 0); // Adjust position to be more centered
+    console.log("Skull object added to the scene at position", object.position); // Log position details
 });
 
 function makeInstance(geometry, texturePath, x) {
@@ -40,15 +57,12 @@ const cubes = [
 const light = new THREE.DirectionalLight(0xffffff, 1.0);
 light.position.set(-1, 2, 4);
 scene.add(light);
+console.log("Directional light added to the scene");
 
 camera.position.z = 5;
 
 function animate() {
     requestAnimationFrame(animate);
-    cubes.forEach(cube => {
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-    });
     renderer.render(scene, camera);
 }
 animate();

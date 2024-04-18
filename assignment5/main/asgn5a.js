@@ -1,5 +1,7 @@
 import * as THREE from '../lib/three.module.js';
 import { OBJLoader } from '../lib/OBJLoader.js';
+import { MTLLoader } from 'https://threejs.org/examples/jsm/loaders/MTLLoader.js';
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -15,27 +17,20 @@ const loader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
 
 // Load the OBJ file
-objLoader.load('12140_Skull_v3_L2.obj', function(object) {
-    console.log("Skull OBJ loaded:", object); // Log the loaded object
+const mtlLoader = new MTLLoader();
 
-    object.traverse(function(child) {
-        if (child instanceof THREE.Mesh) {
-            console.log("Skull Mesh found:", child); // Log mesh details
+mtlLoader.load('path/to/skull.mtl', function(materials) {
+    materials.preload();
 
-            // Load and apply the texture
-            child.material.map = loader.load('Skull.jpg', function(texture) {
-                console.log("Skull texture loaded successfully", texture); // Log successful texture load
-            }, undefined, function(error) {
-                console.log("Error loading skull texture:", error); // Log texture loading error
-            });
-            child.material.needsUpdate = true; // Ensure the material is updated
-        }
+    const objLoader = new OBJLoader();
+    objLoader.setMaterials(materials);  // Set the parsed materials to OBJLoader
+    
+    objLoader.load('12140_Skull_v3_L2.obj', function(object) {
+        scene.add(object);
+        object.position.set(0, -5, 0);  // Adjust the position as needed
     });
-
-    scene.add(object);
-    object.position.set(0, 0, 0); // Adjust position to be more centered
-    console.log("Skull object added to the scene at position", object.position); // Log position details
 });
+
 
 function makeInstance(geometry, texturePath, x) {
     const texture = loader.load(texturePath);

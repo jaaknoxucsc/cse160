@@ -17,7 +17,7 @@ objLoader.load('12140_Skull_v3_L2.obj', function(object) {
         }
     });
     scene.add(object);
-    object.position.set(0, -5, 0);  // Adjust position to make it a background element
+    object.position.set(0, 0, 0);  // Adjust position to make it a background element
 });
 
 function makeInstance(geometry, texturePath, x) {

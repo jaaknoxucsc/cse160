@@ -12,19 +12,17 @@ const loader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
 
 objLoader.load('teapot.obj', function(object) {
+    const texture = loader.load('jacob1.PNG');
     object.traverse(function(child) {
         if (child instanceof THREE.Mesh) {
-            const texture = loader.load('jacob1.PNG');
             child.material = new THREE.MeshPhongMaterial({
                 map: texture
             });
         }
     });
-    
     scene.add(object);
     object.position.set(-5, -3, 0); 
     object.scale.set(1, 1, 1); 
-
 });
 
 function makeInstance(geometry, texturePath, x) {

@@ -32,9 +32,9 @@ function makeInstance(geometry, texturePath, x) {
 const geometry = new THREE.BoxGeometry();
 
 const cubes = [
-    makeInstance(geometry, 'jacob1.png', 0),
-    makeInstance(geometry, 'jacob2.png', -2),
-    makeInstance(geometry, 'jacob1.png', 2),
+    makeInstance(geometry, 'jacob1.PNG', 0),
+    makeInstance(geometry, 'jacob2.PNG', -2),
+    makeInstance(geometry, 'jacob1.PNG', 2),
 ];
 
 const light = new THREE.DirectionalLight(0xffffff, 1.0);

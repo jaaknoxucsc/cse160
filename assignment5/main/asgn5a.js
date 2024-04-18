@@ -1,2 +1,2 @@
-const scene = new THREE.Scene();
-const loader = new THREE.OBJLoader();
+import * as THREE from '../lib/three.module.js';
+import { OBJLoader } from '../lib/OBJLoader.js';

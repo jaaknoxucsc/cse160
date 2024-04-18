@@ -14,12 +14,15 @@ const objLoader = new OBJLoader();
 objLoader.load('teapot.obj', function(object) {
     object.traverse(function(child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshBasicMaterial({ wireframe: true });
+            const texture = loader.load('jacob1.PNG');
+            child.material = new THREE.MeshPhongMaterial({
+                map: texture
+            });
         }
     });
     
     scene.add(object);
-    object.position.set(0, -5, 0); 
+    object.position.set(-5, -3, 0); 
     object.scale.set(1, 1, 1); 
 
 });

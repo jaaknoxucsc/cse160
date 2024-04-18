@@ -11,7 +11,7 @@ document.body.appendChild(renderer.domElement);
 const loader = new THREE.TextureLoader();
 const objLoader = new OBJLoader();
 
-objLoader.load('12140_Skull_v3_L2.obj', function(object) {
+objLoader.load('teapot.obj', function(object) {
     object.traverse(function(child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshBasicMaterial({ wireframe: true });

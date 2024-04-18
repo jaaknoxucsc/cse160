@@ -19,8 +19,8 @@ objLoader.load('teapot.obj', function(object) {
     });
     
     scene.add(object);
-    object.position.set(0, 0, 0);  // Adjust position to make it a background element
-    object.scale.set(10, 10, 10);  // Adjust scale as necessary
+    object.position.set(0, -5, 0); 
+    object.scale.set(1, 1, 1); 
 
 });
 

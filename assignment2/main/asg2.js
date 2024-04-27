@@ -1,4 +1,4 @@
-// asgn1.js
+// asg2.js
 import { Cube } from './cube.js';
 let gl;
 let shaderProgram;

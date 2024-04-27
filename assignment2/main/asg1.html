@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="asg1.css">
+    <script src="../lib/gl-matrix-min.js"></script>
+    <script src="triangle.js" type="module"></script>
+    <script src="cube.js" type="module"></script>
+    <script src="asg1.js" type="module"></script>
+</head>
+<body>
+    <canvas id="glcanvas" width="640" height="480"></canvas>
+    <div id="fpsCounter">FPS: 0</div>
+    <div class="control">
+        <label for="squat-animation-slider">Hip Rotation:</label>
+        <input type="range" id="squat-animation-slider" min="0" max="1" step="0.01" value="0">
+    </div>
+    <div class="control">
+        <label for="lower-leg-rotation-slider">Knee Rotation:</label>
+        <input type="range" id="lower-leg-rotation-slider" min="-45" max="45" value="0" step="1" style="width: 200px;">
+    </div>
+    <div class="control">
+        <button id="animation-toggle">MAKE THE CREATURE DO HOPS</button>
+    </div>
+    <div class="control flaming-text">
+        SHIFT CLICK TO MAKE HIM EXPLODE!
+    </div>
+</body>
+</html>

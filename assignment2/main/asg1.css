@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding-top: 20px;
+}
+#glcanvas {
+    border: 1px solid black;
+}
+#fpsCounter {
+    margin-top: 10px;
+}
+.control {
+    margin: 5px 0;
+}
+@keyframes flaming {
+    0%, 100% {
+        color: red;
+        text-shadow: 0 0 10px yellow, 0 0 20px orange, 0 0 30px red;
+    }
+    50% {
+        color: orange;
+        text-shadow: 0 0 20px yellow, 0 0 30px orange, 0 0 40px red;
+    }
+}
+.flaming-text {
+    font-weight: bold;
+    animation: flaming 1s infinite;
+    font-size: 20px;
+}

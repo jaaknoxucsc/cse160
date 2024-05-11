@@ -68,7 +68,7 @@ function getMapIndexFromCamera() {
     glMatrix.vec3.normalize(forwardVector, forwardVector);
 
     let checkPoint = glMatrix.vec3.create();
-    glMatrix.vec3.scaleAndAdd(checkPoint, camera.eye, forwardVector, 4);
+    glMatrix.vec3.scaleAndAdd(checkPoint, camera.eye, forwardVector, 10);
 
     let mapX = Math.floor((checkPoint[0] + 3.5 +(mapSize * 6 / 2)) / 6);
     let mapZ = Math.floor((checkPoint[2] + 3.5 + (mapSize * 6 / 2)) / 6);

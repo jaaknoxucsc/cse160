@@ -197,8 +197,8 @@ function loadTexture(url, callback) {
 function initTextures() {
     cloudsTexture = loadTexture('clouds.png', renderScene);
     grassTexture = loadTexture('grass.png', renderScene);
-    jacob1Texture = loadTexture('jacob1.PNG', renderScene);
-    jacob2Texture = loadTexture('jacob2.PNG', renderScene);
+    jacob1Texture = loadTexture('jacob1.png', renderScene);
+    jacob2Texture = loadTexture('jacob2.png', renderScene);
     appleTexture = loadTexture('apple.png', renderScene);
 }
 

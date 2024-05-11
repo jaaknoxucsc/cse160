@@ -6,8 +6,85 @@
     <script src="triangle.js" type="module"></script>
     <script src="cube.js" type="module"></script>
     <script src="asg3.js" type="module"></script>
+    <style>
+        body, html { 
+            height: 100%; 
+            margin: 0; 
+            overflow: hidden; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #000;
+        }
+        #contentContainer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        #sideImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        #startupImage {
+            position: absolute;
+            top: 0;
+            left: 65%;
+            transform: translateX(-50%);
+            width: 60%;
+            max-height: 100%;
+            cursor: pointer;
+            display: none;
+            object-fit: cover;
+        }
+        #glcanvas { 
+            flex-grow: 1;
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="glcanvas" width="640" height="480"></canvas>
+    <div id="contentContainer">
+        <img id="sideImage" src="controls.png" style="display: block;">
+        <img id="startupImage" src="hellobro.png" style="display: block;">
+        <canvas id="glcanvas"></canvas>
+    </div>
+    <img id="victoryImage" src="victory.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30%; z-index: 10;">
+    <img id="badEndingImage" src="badEnding.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30%; z-index: 10;">
+    <script>
+        function resizeCanvas() {
+            const canvas = document.getElementById('glcanvas');
+            const widthToHeight = 4 / 3;
+            let newWidth = window.innerWidth * 0.85;
+            let newHeight = window.innerHeight;
+            let newWidthToHeight = newWidth / newHeight;
+
+            if (newWidthToHeight > widthToHeight) {
+                newWidth = newHeight * widthToHeight;
+                canvas.style.height = newHeight + 'px';
+                canvas.style.width = newWidth + 'px';
+            } else {
+                newHeight = newWidth / widthToHeight;
+                canvas.style.width = newWidth + 'px';
+                canvas.style.height = newHeight + 'px';
+            }
+
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const image = document.getElementById('startupImage');
+            image.style.display = 'block'; 
+
+            image.addEventListener('click', function() {
+                image.style.display = 'none'; 
+            });
+            resizeCanvas();
+        });
+
+        window.addEventListener('resize', resizeCanvas);
+    </script>
 </body>
 </html>

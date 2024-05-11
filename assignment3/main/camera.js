@@ -8,9 +8,14 @@ class Camera {
         this.eye = glMatrix.vec3.fromValues(0, 0, 5);
         this.at = glMatrix.vec3.fromValues(0, 0, 0);
         this.up = glMatrix.vec3.fromValues(0, 1, 0);
+        this.yaw = -Math.PI / 2;
+        this.pitch = 0;
+        this.mouseSensitivity = 0.003;
+        this.rotationSensitivity = 1.0;
 
         this.viewMatrix = glMatrix.mat4.create();
         this.projectionMatrix = glMatrix.mat4.create();
+        this.initialHeight = this.eye[1];
         this.updateProjectionMatrix();
         this.updateViewMatrix();
     }
@@ -18,28 +23,40 @@ class Camera {
     updateProjectionMatrix() {
         glMatrix.mat4.perspective(this.projectionMatrix, this.fov, this.aspect, this.near, this.far);
     }
-
     updateViewMatrix() {
+        let direction = glMatrix.vec3.create();
+        direction[0] = Math.cos(this.pitch) * Math.sin(this.yaw);
+        direction[1] = Math.sin(this.pitch);
+        direction[2] = Math.cos(this.pitch) * Math.cos(this.yaw);
+    
+        glMatrix.vec3.add(this.at, this.eye, direction);
         glMatrix.mat4.lookAt(this.viewMatrix, this.eye, this.at, this.up);
     }
-
+    rotate(deltaX, deltaY) {
+        this.yaw -= deltaX * this.mouseSensitivity;
+        this.pitch -= deltaY * this.mouseSensitivity;
+        this.pitch = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, this.pitch));
+    }
+    
     moveForward(speed) {
-        let f = glMatrix.vec3.create();
-        glMatrix.vec3.subtract(f, this.at, this.eye);
-        glMatrix.vec3.normalize(f, f);
-        glMatrix.vec3.scale(f, f, speed);
-        glMatrix.vec3.add(this.eye, this.eye, f);
-        glMatrix.vec3.add(this.at, this.at, f);
+        let direction = glMatrix.vec3.create();
+        direction[0] = Math.sin(this.yaw);
+        direction[1] = 0;
+        direction[2] = Math.cos(this.yaw);
+        glMatrix.vec3.scale(direction, direction, speed);
+        glMatrix.vec3.add(this.eye, this.eye, direction);
+        this.eye[1] = this.initialHeight;
         this.updateViewMatrix();
     }
 
     moveBackward(speed) {
-        let b = glMatrix.vec3.create();
-        glMatrix.vec3.subtract(b, this.eye, this.at);
-        glMatrix.vec3.normalize(b, b);
-        glMatrix.vec3.scale(b, b, speed);
-        glMatrix.vec3.add(this.eye, this.eye, b);
-        glMatrix.vec3.add(this.at, this.at, b);
+        let direction = glMatrix.vec3.create();
+        direction[0] = -Math.sin(this.yaw);
+        direction[1] = 0;
+        direction[2] = -Math.cos(this.yaw);
+        glMatrix.vec3.scale(direction, direction, speed);
+        glMatrix.vec3.add(this.eye, this.eye, direction);
+        this.eye[1] = this.initialHeight;
         this.updateViewMatrix();
     }
 
@@ -68,22 +85,12 @@ class Camera {
     }
 
     panLeft(alpha) {
-        let f = glMatrix.vec3.create();
-        let rotationMatrix = glMatrix.mat4.create();
-        glMatrix.vec3.subtract(f, this.at, this.eye);
-        glMatrix.mat4.rotateY(rotationMatrix, rotationMatrix, alpha);
-        glMatrix.vec3.transformMat4(f, f, rotationMatrix);
-        glMatrix.vec3.add(this.at, this.eye, f);
+        this.yaw += alpha * this.rotationSensitivity;
         this.updateViewMatrix();
     }
 
     panRight(alpha) {
-        let f = glMatrix.vec3.create();
-        let rotationMatrix = glMatrix.mat4.create();
-        glMatrix.vec3.subtract(f, this.at, this.eye);
-        glMatrix.mat4.rotateY(rotationMatrix, rotationMatrix, -alpha);
-        glMatrix.vec3.transformMat4(f, f, rotationMatrix);
-        glMatrix.vec3.add(this.at, this.eye, f);
+        this.yaw -= alpha * this.rotationSensitivity;
         this.updateViewMatrix();
     }
 }

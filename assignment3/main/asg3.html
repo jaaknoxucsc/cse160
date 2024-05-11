@@ -45,8 +45,17 @@
     </style>
 </head>
 <body>
+
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <div id="contentContainer">
-        <img id="sideImage" src="Controls.png" style="display: block;">
+        <div id="controlsContainer">
+            <img id="sideImage" src="controls.png" style="height: 95%;">
+            <button onclick="playMusic()" style="width: 100%; padding: 10px 0; background-color: lime; color: black; border: none; cursor: pointer;">Play Music</button>
+        </div>
         <img id="startupImage" src="hellobro.png" style="display: block;">
         <canvas id="glcanvas"></canvas>
     </div>
@@ -85,6 +94,10 @@
         });
 
         window.addEventListener('resize', resizeCanvas);
+        function playMusic() {
+            var audio = document.getElementById('bgMusic');
+            audio.play();
+        }
     </script>
 </body>
 </html>

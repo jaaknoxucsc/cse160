@@ -35,7 +35,7 @@
             width: 60%;
             max-height: 100%;
             cursor: pointer;
-            display: none;
+            display: block;
             object-fit: cover;
         }
         #glcanvas { 
@@ -45,18 +45,16 @@
     </style>
 </head>
 <body>
-
     <audio id="bgMusic" loop>
         <source src="music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        Audio Unsupported.
     </audio>
 
     <div id="contentContainer">
         <div id="controlsContainer">
-            <img id="sideImage" src="controls.png" style="height: 95%;">
-            <button onclick="playMusic()" style="width: 100%; padding: 10px 0; background-color: lime; color: black; border: none; cursor: pointer;">Play Music</button>
+            <img id="sideImage" src="controls.png">
         </div>
-        <img id="startupImage" src="hellobro.png" style="display: block;">
+        <img id="startupImage" src="hellobro.png">
         <canvas id="glcanvas"></canvas>
     </div>
     <img id="victoryImage" src="victory.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30%; z-index: 10;">
@@ -85,19 +83,21 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const image = document.getElementById('startupImage');
-            image.style.display = 'block'; 
+            const audio = document.getElementById('bgMusic');
 
             image.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
                 image.style.display = 'none'; 
             });
+
             resizeCanvas();
         });
 
         window.addEventListener('resize', resizeCanvas);
-        function playMusic() {
-            var audio = document.getElementById('bgMusic');
-            audio.play();
-        }
     </script>
 </body>
 </html>

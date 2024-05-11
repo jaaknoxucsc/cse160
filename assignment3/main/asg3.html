@@ -66,7 +66,7 @@
             let newWidth = window.innerWidth * 0.85;
             let newHeight = window.innerHeight;
             let newWidthToHeight = newWidth / newHeight;
-
+    
             if (newWidthToHeight > widthToHeight) {
                 newWidth = newHeight * widthToHeight;
                 canvas.style.height = newHeight + 'px';
@@ -76,15 +76,16 @@
                 canvas.style.width = newWidth + 'px';
                 canvas.style.height = newHeight + 'px';
             }
-
+    
             canvas.width = newWidth;
             canvas.height = newHeight;
         }
-
+    
         document.addEventListener('DOMContentLoaded', () => {
             const image = document.getElementById('startupImage');
             const audio = document.getElementById('bgMusic');
-
+            audio.volume = 0.25;
+    
             image.addEventListener('click', function() {
                 if (audio.paused) {
                     audio.play();
@@ -93,11 +94,12 @@
                 }
                 image.style.display = 'none'; 
             });
-
+    
             resizeCanvas();
         });
-
+    
         window.addEventListener('resize', resizeCanvas);
     </script>
+    
 </body>
 </html>

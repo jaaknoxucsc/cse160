@@ -80,19 +80,17 @@ function addBlock() {
     const { mapX, mapZ } = getMapIndexFromCamera();
     if (mapX >= 0 && mapX < mapSize && mapZ >= 0 && mapZ < mapSize) {
         map[mapX][mapZ] = 1;
-        createWorld(); // Rebuild the world to reflect changes
+        createWorld();
     }
 }
 
 function deleteBlock() {
     const { mapX, mapZ } = getMapIndexFromCamera();
     if (mapX >= 0 && mapX < mapSize && mapZ >= 0 && mapZ < mapSize && map[mapX][mapZ] !== 0) {
-        map[mapX][mapZ] = 0; // Remove the block
-        createWorld(); // Rebuild the world to reflect changes
+        map[mapX][mapZ] = 0;
+        createWorld();
     }
 }
-
-
 
 function handleLockedMouseMove(event) {
     const deltaX = event.movementX || event.mozMovementX || 0;
@@ -211,7 +209,7 @@ function checkVictoryCondition() {
             if (map[x][z] === 2) countTwos++;
         }
     }
-    return countTwos === 0 && countOnes === 11;
+    return countTwos === 0 && countOnes >= 11;
 }
 function checkBadEndingCondition() {
     let countOnes = 0;

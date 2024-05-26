@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../lib/gl-matrix-min.js"></script>
+    <script src="camera.js" type="module"></script>
+    <script src="triangle.js" type="module"></script>
+    <script src="cube.js" type="module"></script>
+    <script src="sphere.js" type="module"></script>
+    <script src="asg4.js" type="module"></script>
+    <style>
+        body, html { 
+            height: 100%; 
+            margin: 0; 
+            overflow: hidden; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #000;
+        }
+        #contentContainer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        #sideImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scaleY(0.6);
+            transform-origin: bottom;
+        }
+        #startupImage {
+            position: absolute;
+            top: 0;
+            left: 65%;
+            transform: translateX(-50%);
+            width: 60%;
+            max-height: 100%;
+            cursor: pointer;
+            display: block;
+            object-fit: cover;
+        }
+        #glcanvas { 
+            flex-grow: 1;
+            background-color: #fff;
+        }
+        #sliderContainer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Audio Unsupported.
+    </audio>
+
+    <div id="contentContainer">
+        <div id="controlsContainer">
+            <img id="sideImage" src="Controls.png">
+        </div>
+        <img id="startupImage" src="hellobro.png">
+        <canvas id="glcanvas"></canvas>
+    </div>
+    <img id="victoryImage" src="victory.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30%; z-index: 10;">
+    <img id="badEndingImage" src="badEnding.png" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30%; z-index: 10;">
+
+    <div id="sliderContainer">
+        <label for="lightX">Light X: </label>
+        <input type="range" id="lightX" min="-20" max="20" step="0.1" value="10"><br>
+        <label for="lightY">Light Y: </label>
+        <input type="range" id="lightY" min="-20" max="20" step="0.1" value="10"><br>
+        <label for="lightZ">Light Z: </label>
+        <input type="range" id="lightZ" min="-20" max="20" step="0.1" value="10"><br>
+        <label for="lightR">Light Red: </label>
+        <input type="range" id="lightR" min="0" max="1" step="0.01" value="1"><br>
+        <label for="lightG">Light Green: </label>
+        <input type="range" id="lightG" min="0" max="1" step="0.01" value="1"><br>
+        <label for="lightB">Light Blue: </label>
+        <input type="range" id="lightB" min="0" max="1" step="0.01" value="1"><br>
+        <label for="spotlightX">Spotlight X: </label>
+        <input type="range" id="spotlightX" min="-20" max="20" step="0.1" value="20"><br>
+        <label for="spotlightY">Spotlight Y: </label>
+        <input type="range" id="spotlightY" min="-20" max="20" step="0.1" value="6"><br>
+        <label for="spotlightZ">Spotlight Z: </label>
+        <input type="range" id="spotlightZ" min="-20" max="20" step="0.1" value="10"><br>
+        <label for="spotlightDirX">Spotlight Direction X: </label>
+        <input type="range" id="spotlightDirX" min="-1" max="1" step="0.01" value=".2"><br>
+        <label for="spotlightDirY">Spotlight Direction Y: </label>
+        <input type="range" id="spotlightDirY" min="-1" max="1" step="0.01" value=".3"><br>
+        <label for="spotlightDirZ">Spotlight Direction Z: </label>
+        <input type="range" id="spotlightDirZ" min="-1" max="1" step="0.01" value="1"><br>
+        <button id="toggleLightingButton">Toggle All Lighting</button>
+        <button id="toggleRotatingLightButton">Toggle Rotating Light</button>
+        <button id="toggleSpotlightButton">Toggle Spotlight</button>
+        <button id="toggleNormalsButton">Toggle Normals</button>
+    </div>
+
+    <script>
+        function resizeCanvas() {
+            const canvas = document.getElementById('glcanvas');
+            const widthToHeight = 4 / 3;
+            let newWidth = window.innerWidth * 0.85;
+            let newHeight = window.innerHeight;
+            let newWidthToHeight = newWidth / newHeight;
+    
+            if (newWidthToHeight > widthToHeight) {
+                newWidth = newHeight * widthToHeight;
+                canvas.style.height = newHeight + 'px';
+                canvas.style.width = newWidth + 'px';
+            } else {
+                newHeight = newWidth / widthToHeight;
+                canvas.style.width = newWidth + 'px';
+                canvas.style.height = newHeight + 'px';
+            }
+    
+            canvas.width = newWidth;
+            canvas.height = newHeight;
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const image = document.getElementById('startupImage');
+            const audio = document.getElementById('bgMusic');
+            audio.volume = 0.25;
+    
+            image.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+                image.style.display = 'none'; 
+            });
+    
+            resizeCanvas();
+        });
+    
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+</body>
+</html>

@@ -55,7 +55,7 @@ const secondTrackGain = audioContext.createGain();
 bgMusicSource.connect(bgMusicGain).connect(audioContext.destination);
 secondTrackSource.connect(secondTrackGain).connect(audioContext.destination);
 
-bgMusicGain.gain.value = 0.3;
+bgMusicGain.gain.value = 0.2;
 secondTrackGain.gain.value = 0;
 
 canvas.addEventListener('click', () => {
@@ -835,11 +835,13 @@ function displayFinalMessage2() {
     cloudSpeedMultiplier = 0.07;
     updateWorld();
 
-    setTimeout(() => {
-        fadeOutAudio(bgMusicGain, 2);
-    }, 2000);
+    
+    fadeOutAudio(bgMusicGain, 2);
+    
     secondTrack.play();
-    fadeInAudio(secondTrackGain, 2);
+    setTimeout(() => {
+        fadeInAudio(secondTrackGain, 2);
+    }, 2000);
 
     setTimeout(() => {
         displayText("hey \nyou can kind of still see them up there \nthrough the clouds \n⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\nmaybe this was how it was supposed to happen", () => {
@@ -885,7 +887,7 @@ function fadeInAudio(gainNode, duration) {
     const currentTime = audioContext.currentTime;
     gainNode.gain.cancelScheduledValues(currentTime);
     gainNode.gain.setValueAtTime(0, currentTime);
-    gainNode.gain.linearRampToValueAtTime(0.3, currentTime + duration);
+    gainNode.gain.linearRampToValueAtTime(0.2, currentTime + duration);
 }
 
 

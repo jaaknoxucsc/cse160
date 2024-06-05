@@ -20,7 +20,8 @@ class Camera {
     rotate(deltaX, deltaY) {
         this.yaw -= deltaX * this.mouseSensitivity;
         this.pitch -= deltaY * this.mouseSensitivity;
-        this.pitch = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, this.pitch));
+        const maxPitch = Math.PI / 2 - 0.1;
+        this.pitch = Math.max(-maxPitch, Math.min(maxPitch, this.pitch));
         this.updateCameraDirection();
     }
 

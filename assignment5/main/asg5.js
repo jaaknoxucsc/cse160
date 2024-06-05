@@ -706,14 +706,14 @@ function updateWaterMeter(playerPosition) {
 
 function processMapChangeLogic() {
     console.log('Processing map change logic, water count:', wateringCount);
-    if (wateringCount === 3) {
+    if (wateringCount === 2) {
         mapVersion = 2;
         updateWorld();
         displayText("KEEP GOING KEEP GOING KEEP GOING \nTHEY FLOURISH UNDER YOUR care \n BUT YOU ARE NOT DONE yet", () => {
             clearText(() => console.log("Message cleared."));
         });
     }
-    if (wateringCount === 6) {
+    if (wateringCount === 4) {
         mapVersion = 3;
         updateWorld();
         displayText("THE SUN IS INCHES away \nTHE CLOUDS MUST BE breached", () => {
@@ -723,7 +723,7 @@ function processMapChangeLogic() {
     if (wateringCount === 8) {
         sunlight.color.set(0xff0000);
         changeSkybox();
-        displayText("SOMETHING'S GONE WRONG \nTHE SUN WAS A lie \nA lie", () => {
+        displayText("SOMETHING'S GONE WRONG \nTHE SUN IS not real", () => {
             clearText(displayFinalMessage);
         });
     }

@@ -2,7 +2,7 @@ import * as THREE from '../lib/three.module.js';
 
 class Camera {
     constructor(canvas, collisionObjects) {
-        this.camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 5000);
+        this.camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
         this.camera.position.set(0, 1.6, 5);
         this.yaw = -Math.PI / 2;
         this.pitch = 0;

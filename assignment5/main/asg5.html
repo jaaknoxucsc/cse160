@@ -20,7 +20,28 @@
         #glcanvas { 
             flex-grow: 1;
             background-color: #fff;
-            filter: saturate(112.5%);
+            filter: saturate(250%);
+        }
+        #waterMeter {
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 300px;
+        border: 3px solid black;
+        background-color: gray;
+        box-sizing: border-box;
+        overflow: hidden;
+        }
+
+        #waterLevel {
+            width: 100%;
+            height: 0%;
+            background-color: blue;
+            position: absolute;
+            bottom: 0;
+            transition: height 2s cubic-bezier(0.2, 1, 0.8, 1);
         }
     </style>
 </head>
@@ -37,7 +58,10 @@
         Space to Sprint
     </div>
     <div id="messageBox" style="position: absolute; top: 10px; width: 100%; text-align: center; color: white; font-size: 40px; font-family: 'Arial', sans-serif; text-shadow: 2px 2px 8px #000000; z-index: 1;"></div>
-
-    
+    <div id="waterMeter">
+        <div id="waterLevel"></div>
+    </div>
+    <audio id="backgroundMusic" src="fatcat.mp3" loop></audio>
+    <audio id="secondTrack" src="thanks.mp3"></audio>
 </body>
 </html>

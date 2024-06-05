@@ -690,7 +690,7 @@ function updateWaterMeter(playerPosition) {
         if (currentHeight > 0) {
             console.log('height:', currentHeight);
             waterLevel.style.height = (currentHeight - 1.0) + '%';
-            growPlant(currentPlant, 1.7);
+            growPlant(currentPlant, 1.5);
         } else {
             
             isFilled = false;

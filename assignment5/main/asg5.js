@@ -852,7 +852,7 @@ function displayFinalMessage2() {
 
 function displayFinalMessage3() {
     setTimeout(() => {
-        displayText("maybe this is what they wanted", () => {
+        displayText("maybe this is what they wanted?", () => {
             clearText(displayFinalMessage4);
         });
     }, 2000);
@@ -870,8 +870,8 @@ function displayFinalMessage4() {
 
 function displayFinalMessage5() {
     setTimeout(() => {
-        displayText("Thank you for playing the Jacob Zone 2", () => {
-            clearText(displayFinalMessage5);
+        displayText("Now leaving: The Jacob Zone", () => {
+            clearText(() => console.log("Message cleared."));
         });
     }, 2000);
 }
